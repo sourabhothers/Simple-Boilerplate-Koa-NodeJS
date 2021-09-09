@@ -25,11 +25,11 @@ const REQUIRED_VARIABLES: string[] = ["MONGO_URL", "PORT", "HOSTNAME"];
 const config = () => {
   const developmentConfigFile = path.resolve(
     __dirname,
-    "../../../.env/.dev.env"
+    "../../../env/.dev.env"
   );
   const productionConfigFile = path.resolve(
     __dirname,
-    "../../../.env/.prod.env"
+    "../../../env/.prod.env"
   );
   //
   if (!developmentConfigFile || !productionConfigFile) {
