@@ -1,1 +1,1 @@
-TODO : Validate config file
+DONE : Validate config file

@@ -1,0 +1,4 @@
+## Please initially run following commands :
+
+npm install
+npm run husky # Before commit of Git

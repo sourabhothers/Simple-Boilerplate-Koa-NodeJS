@@ -1,10 +1,9 @@
-import config from "../config";
 import winston, { LoggerOptions } from "winston";
 import path from "path";
 
 // Create log file in log directory based on Todays date(UTC:00)
-const LOG_DIRECTORY =
-  config?.LOG_DIRECTORY || path.resolve(__dirname, "../logs");
+const LOG_DIRECTORY = path.resolve(__dirname, "../logs");
+
 const date = new Date();
 const logFileName = `${("0" + date.getUTCDate()).substr(-2)}-${(
   "0" +

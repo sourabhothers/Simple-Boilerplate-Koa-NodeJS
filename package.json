@@ -8,7 +8,10 @@
     "dev": "nodemon --enable-source-maps ./dist/backend/index.js",
     "tsc:backend": "tsc --project ./backend/tsconfig.json",
     "tsc:backend:w": "tsc -w --project ./backend/tsconfig.json",
-    "test": "mocha --watch --recursive --parallel -t 10000 ./dist/**/*.test.js"
+    "test": "mocha --enable-source-maps -t 5000 --require source-map-support/register ./dist/**/*.test.js",
+    "test:w": "mocha --watch -t 5000 --require source-map-support/register ./dist/**/*.test.js",
+    "prepare": "husky install",
+    "husky": "husky-init"
   },
   "author": "Saurabh",
   "license": "MIT",
@@ -18,11 +21,11 @@
     "dotenv": "^10.0.0",
     "handlebars": "^4.7.7",
     "koa": "^2.13.1",
-    "mocha": "^9.1.1",
     "mongoose": "^6.0.5",
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.21",
     "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.13.4",
     "@types/koa__router": "^8.0.8",
@@ -30,8 +33,13 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^16.7.13",
     "@types/winston": "^2.4.4",
+    "chai": "^4.3.4",
     "eslint": "^7.32.0",
-    "husky": "^7.0.2",
-    "nodemon": "^2.0.12"
+    "husky": "^7.0.0",
+    "husky-init": "^7.0.0",
+    "mocha": "^9.1.1",
+    "nodemon": "^2.0.12",
+    "source-map-support": "^0.5.20",
+    "typescript": "^4.4.3"
   }
 }

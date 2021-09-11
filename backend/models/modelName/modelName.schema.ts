@@ -6,8 +6,8 @@ export interface IModelName {
 
 const modelSchema: validatorSchemaType<IModelName> = {
   type: "object",
-  properties: [],
-  // additionalProperties:[]
+  properties: {},
+  additionalProperties: false,
 };
 
 export default modelSchema;
