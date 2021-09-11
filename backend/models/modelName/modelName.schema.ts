@@ -4,10 +4,10 @@ export interface IModelName {
   // key: string;
 }
 
-const modelSchema: validatorSchemaType<IModelName> = {
+const modelNameSchema: validatorSchemaType<IModelName> = {
   type: "object",
   properties: {},
   additionalProperties: false,
 };
 
-export default modelSchema;
+export default modelNameSchema;

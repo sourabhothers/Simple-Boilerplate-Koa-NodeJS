@@ -1,8 +1,8 @@
 import buildValidator from "../validator";
 import buildMakeModelName from "./modelName";
-import modelSchema, { IModelName } from "./modelName.schema";
+import modelNameSchema, { IModelName } from "./modelName.schema";
 
-const modelNameValidator = buildValidator<IModelName>(modelSchema);
+const modelNameValidator = buildValidator<IModelName>(modelNameSchema);
 
 const makeModelName = buildMakeModelName(modelNameValidator);
 

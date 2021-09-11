@@ -68,15 +68,38 @@ const config = () => {
   // Required Variables Validation
   configValidator(parsedConfig, REQUIRED_VARIABLES);
 
-  // Extracting values from parsedConfig
-  const { LOG_DIRECTORY, NODE_ENV, MONGO_URL, PORT, HOSTNAME } = parsedConfig;
+  interface INewConfig {
+    LOG_DIRECTORY: string;
+    NODE_ENV: string;
+    MONGO_URL: string;
+    PORT: number;
+    HOSTNAME: string;
+    CORS: "true" | "false";
+    CACHE_VIEWS: "true" | "false";
+    CLUSTER: "true" | "false";
+  }
 
-  const newConfig = {
+  // Extracting values from parsedConfig
+  const {
+    LOG_DIRECTORY,
+    NODE_ENV,
+    MONGO_URL,
+    PORT,
+    HOSTNAME,
+    CORS = "false",
+    CACHE_VIEWS = "true",
+    CLUSTER="false"
+  } = parsedConfig;
+
+  const newConfig: INewConfig = {
     LOG_DIRECTORY: path.resolve(__dirname, LOG_DIRECTORY || "../logs"),
     NODE_ENV: NODE_ENV?.toLocaleLowerCase() || "dev",
     MONGO_URL: MONGO_URL || "mongodb://localhost:27017/TEST_DB_1",
-    PORT: PORT || 3000,
+    PORT: +PORT || 3000,
     HOSTNAME: HOSTNAME || "localhost",
+    CORS: CORS === "true" ? "true" : "false",
+    CACHE_VIEWS: CACHE_VIEWS === "true" ? "true" : "false",
+    CLUSTER: CLUSTER === "true" ? "true" : "false",
   };
   return newConfig;
 };

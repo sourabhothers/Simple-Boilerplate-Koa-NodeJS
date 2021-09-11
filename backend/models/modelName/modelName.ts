@@ -2,10 +2,10 @@ import { IModelName } from "./modelName.schema";
 import { IValidatorFactoryReturnFn } from "../../types";
 
 let buildMakeModelName = function (
-  studentNameValidator: IValidatorFactoryReturnFn<IModelName>
+  modelNameValidator: IValidatorFactoryReturnFn<IModelName>
 ) {
   return (modelNameData: IModelName) => {
-    const { validator, error } = studentNameValidator(modelNameData);
+    const { validator, error } = modelNameValidator(modelNameData);
 
     if (error) throw new Error(error);
 

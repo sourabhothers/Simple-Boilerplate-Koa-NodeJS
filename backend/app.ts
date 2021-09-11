@@ -1,6 +1,10 @@
+import config from "./config";
 import buildLogger from "./utils/logger";
 import preloader, { isPreloaderUsed } from "./utils/preloader";
 import { MainApplication } from "./utils/requiredExports";
+
+// Initializing config before starting app
+config;
 
 const logger = buildLogger(__filename);
 
