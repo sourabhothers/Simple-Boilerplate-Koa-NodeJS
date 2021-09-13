@@ -6,7 +6,7 @@ import configValidator from "./configValidator";
 // const logger = buildLogger("config_index");
 const logger = {
   info: (message: any) => console.log(message),
-  error: (message: any) => console.error(message),
+  error: (message: any) => console.error(message)
 };
 /**
  *
@@ -55,7 +55,7 @@ const config = () => {
 
   const dotenvResult = dotenv.config({
     path: chosenEnvFile,
-    debug: process.env.NODE_ENV === "dev",
+    debug: process.env.NODE_ENV === "dev"
   });
 
   if (dotenvResult.error) {
@@ -74,9 +74,10 @@ const config = () => {
     MONGO_URL: string;
     PORT: number;
     HOSTNAME: string;
-    CORS: "true" | "false";
-    CACHE_VIEWS: "true" | "false";
-    CLUSTER: "true" | "false";
+    CORS: boolean;
+    CACHE_VIEWS: boolean;
+    CLUSTER: boolean;
+    DEBUG: boolean;
   }
 
   // Extracting values from parsedConfig
@@ -88,7 +89,8 @@ const config = () => {
     HOSTNAME,
     CORS = "false",
     CACHE_VIEWS = "true",
-    CLUSTER="false"
+    CLUSTER = "false",
+    DEBUG = "false"
   } = parsedConfig;
 
   const newConfig: INewConfig = {
@@ -97,9 +99,10 @@ const config = () => {
     MONGO_URL: MONGO_URL || "mongodb://localhost:27017/TEST_DB_1",
     PORT: +PORT || 3000,
     HOSTNAME: HOSTNAME || "localhost",
-    CORS: CORS === "true" ? "true" : "false",
-    CACHE_VIEWS: CACHE_VIEWS === "true" ? "true" : "false",
-    CLUSTER: CLUSTER === "true" ? "true" : "false",
+    CORS: CORS === "true" ? true : false,
+    CACHE_VIEWS: CACHE_VIEWS === "true" ? true : false,
+    CLUSTER: CLUSTER === "true" ? true : false,
+    DEBUG: DEBUG === "true" ? true : false
   };
   return newConfig;
 };

@@ -1,3 +1,3 @@
-import * as nameMiddleware_ from "./name.middleware";
+import * as testMiddleware_ from "./test.middleware";
 
-export const nameMiddleware = nameMiddleware_;
+export const testMiddleware = testMiddleware_;

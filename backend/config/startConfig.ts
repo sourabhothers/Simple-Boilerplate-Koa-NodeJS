@@ -3,7 +3,7 @@ import path from "path";
 
 const logger = {
   info: (message: any) => console.log(message),
-  error: (message: any) => console.error(message),
+  error: (message: any) => console.error(message)
 };
 
 const startConfig = () => {
@@ -33,7 +33,7 @@ const startConfig = () => {
 
     const parsedConfig = dotenv.config({
       path: chosenEnvFile,
-      debug: true,
+      debug: true
     }).parsed;
 
     resolve(parsedConfig);

@@ -31,7 +31,7 @@ const buildLogger = (__filename: string, label?: string) => {
                 info.message
               }`
           )
-        ),
+        )
       }),
       new winston.transports.File({
         filename: `${LOG_DIRECTORY}/${logFileName}`,
@@ -44,10 +44,10 @@ const buildLogger = (__filename: string, label?: string) => {
                 info.message
               }`
           )
-        ),
-      }),
+        )
+      })
     ],
-    level: "silly",
+    level: "silly"
   };
 
   const logger = winston.createLogger(logConfiguration);

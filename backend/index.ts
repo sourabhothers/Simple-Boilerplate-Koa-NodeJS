@@ -18,7 +18,7 @@ const startApplication = () => {
 };
 
 // Enable Multiple instances of app for performance.
-if (config.CLUSTER === "true") {
+if (config.CLUSTER === true) {
   if (cluster.isMaster) {
     for (var i = 0; i < cpus().length; i++) {
       cluster.fork();

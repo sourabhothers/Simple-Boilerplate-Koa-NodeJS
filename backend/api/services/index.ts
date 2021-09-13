@@ -1,3 +1,3 @@
-import * as nameService_ from "./name.service";
+import * as testService_ from "./test.service";
 
-export const nameService = nameService_;
+export const testService = testService_;
