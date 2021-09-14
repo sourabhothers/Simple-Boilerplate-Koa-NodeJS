@@ -1,5 +1,5 @@
-import * as nameControllers_ from "./test.controllers";
-import * as notFoundControllers_ from "./notFound.controllers";
+import * as testControllers_ from './test.controllers';
+import * as notFoundControllers_ from './notFound.controllers';
 
-export const nameControllers = nameControllers_;
+export const testControllers = testControllers_;
 export const notFoundControllers = notFoundControllers_;

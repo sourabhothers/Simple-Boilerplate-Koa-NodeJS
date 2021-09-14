@@ -1,20 +1,20 @@
-import { IRouter } from "../../types";
-import { nameControllers } from "../controllers";
-import { testMiddleware } from "../middlewares";
+import { IRouter } from '../../types';
+import { testControllers } from '../controllers';
+import { testMiddleware } from '../middlewares';
 
-const nameRoutes = (testRouter: IRouter) => {
+const nameRoutes = (testRouter: IRouter): void => {
   const router: IRouter = testRouter;
 
-  router.get("/", nameControllers.test_);
-  router.get("/engine", nameControllers.test_engine);
-  router.get("/json", nameControllers.test_json);
-  router.get("/form", nameControllers.test_form);
+  router.get('/', testControllers.test);
+  router.get('/engine', testControllers.testEngine);
+  router.get('/json', testControllers.testJson);
+  router.get('/form', testControllers.testForm);
   router.get(
-    "/middleware",
-    testMiddleware.test,
-    nameControllers.afterTestMiddleware
+    '/middleware',
+    testMiddleware.testMiddleware,
+    testControllers.testMiddleController,
   );
-  router.get("/params/:param_1", nameControllers.test_params);
+  router.get('/params/:param_1', testControllers.testParams);
 };
 
 export default nameRoutes;

@@ -1,3 +1,3 @@
-export const firstService = async () => {
-  return "Hello, This is first service";
-};
+export const firstService = (): string => 'Hello, This is first service';
+
+export const firstServiceTwo = (): string => 'Hello, This is Second service';

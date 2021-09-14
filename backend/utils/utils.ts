@@ -1,4 +1,4 @@
-import { IBuildApiError, ICustomError } from "../types";
+import { IBuildApiError, ICustomError } from '../types';
 
 export const errorAsText = (error: any) =>
   `${error?.name}\n${error?.message}\n${error?.stack}`;
@@ -11,15 +11,13 @@ export const buildApiError: IBuildApiError = ({
   statusCode,
   code,
   description,
-  isCustom
-}) => {
-  return {
-    statusCode: statusCode || 400,
-    name: name,
-    message: message,
-    stack: stack,
-    code: code,
-    isCustom: isCustom || true,
-    description: description
-  };
-};
+  isCustom,
+}) => ({
+  statusCode: statusCode || 400,
+  name,
+  message,
+  stack,
+  code,
+  isCustom: isCustom || true,
+  description,
+});

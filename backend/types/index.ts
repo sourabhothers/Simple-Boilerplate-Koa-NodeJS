@@ -1,7 +1,6 @@
-import { ValidateFunction } from "ajv";
-import { JSONSchemaType } from "ajv";
-import KoaRouter, { RouterContext } from "@koa/router";
-import Application from "koa";
+import { ValidateFunction, JSONSchemaType } from 'ajv';
+import KoaRouter, { RouterContext } from '@koa/router';
+import Application from 'koa';
 
 // Basics
 
@@ -23,7 +22,7 @@ export type validatorSchemaType<IValidationData> =
   JSONSchemaType<IValidationData>;
 
 export type IValidatorFactoryReturnFn<IValidationData> = (
-  validationData: IValidationData
+  validationData: IValidationData,
 ) => {
   validator: ValidateFunction<IValidationData>;
   error: string | null;
@@ -36,7 +35,7 @@ export interface ICustomError {
   message: string;
   statusCode: number;
   code?: string;
-  isCustom: Boolean;
+  isCustom: boolean;
   description?: string;
 }
 

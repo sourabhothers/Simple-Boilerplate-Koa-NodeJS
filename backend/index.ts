@@ -1,14 +1,16 @@
 // Import Config in beginning
-import config from "./config";
+import cluster from 'cluster';
+import { cpus } from 'os';
+import config from './config';
+
+import app from './app';
+import buildLogger from './utils/logger';
+
+// eslint-disable-next-line no-unused-expressions
 config;
 
-import app from "./app";
-import buildLogger from "./utils/logger";
-import cluster from "cluster";
-import { cpus } from "os";
-
 // Build logger
-const logger = buildLogger("main_index");
+const logger = buildLogger('main_index');
 
 const startApplication = () => {
   // Listen / Start app
@@ -20,7 +22,7 @@ const startApplication = () => {
 // Enable Multiple instances of app for performance.
 if (config.CLUSTER === true) {
   if (cluster.isMaster) {
-    for (var i = 0; i < cpus().length; i++) {
+    for (let i = 0; i < cpus().length; i++) {
       cluster.fork();
     }
   } else {

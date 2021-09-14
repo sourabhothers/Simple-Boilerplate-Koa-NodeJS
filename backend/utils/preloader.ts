@@ -1,23 +1,23 @@
-import mainRoutes from "../api/routes";
-import { Router } from "./requiredExports";
-import buildLogger from "./logger";
-import { IApplication, ICustomError, IRouterContext } from "../types";
+import cors from '@koa/cors';
+import path from 'path';
+import koaEJS from 'koa-ejs';
+import bodyParser from 'koa-bodyparser';
+import mainRoutes from '../api/routes';
+import { Router } from './requiredExports';
+import buildLogger from './logger';
+import { IApplication, ICustomError, IRouterContext } from '../types';
 
-import cors from "@koa/cors";
-import path from "path";
-import config from "../config";
-import koaEJS from "koa-ejs";
-import bodyParser from "koa-bodyparser";
-import { buildApiError, errorAsText } from "./utils";
+import config from '../config';
+import { buildApiError, errorAsText } from './utils';
 
 // Logger
 const logger = buildLogger(__filename);
 
 // Setting preloader used or not to False. Make sure to assign True if used.
-export let isPreloaderUsed: boolean = false;
+export let isPreloaderUsed = false;
 
 // Preloading configuration
-logger.info("Preloader Configuring ...");
+logger.info('Preloader Configuring ...');
 
 /**
  * Main Content
@@ -41,12 +41,12 @@ const preloader = (app: IApplication) => {
       try {
         // Try block : Level 2
         const defaultError: ICustomError = {
-          name: "Internal Error",
-          message: "Something went wrong",
+          name: 'Internal Error',
+          message: 'Something went wrong',
           statusCode: 500,
-          description: "",
-          code: "000",
-          isCustom: false
+          description: '',
+          code: '000',
+          isCustom: false,
         };
 
         // If error is know/ thrown willingly then return same error. With isCustom prop.
@@ -58,34 +58,34 @@ const preloader = (app: IApplication) => {
 
         // Conditional error
         switch (error.name) {
-          case "SyntaxError":
+          case 'SyntaxError':
             defaultError.statusCode = 400;
-            defaultError.name = "SyntaxError";
+            defaultError.name = 'SyntaxError';
             defaultError.message = error.message;
             defaultError.description =
-              "Please ensure sending form / json data is correct.";
+              'Please ensure sending form / json data is correct.';
             break;
 
-          case "PayloadTooLargeError":
+          case 'PayloadTooLargeError':
             defaultError.statusCode = 400;
-            defaultError.name = "PayloadTooLargeError";
+            defaultError.name = 'PayloadTooLargeError';
             defaultError.message = error.message;
             break;
 
-          case "TypeError":
+          case 'TypeError':
             defaultError.statusCode = 500;
-            defaultError.name = "TypeError";
-            defaultError.message = "Error! Internal Type Error.";
+            defaultError.name = 'TypeError';
+            defaultError.message = 'Error! Internal Type Error.';
             break;
 
-          case "ReferenceError":
+          case 'ReferenceError':
             defaultError.statusCode = 500;
-            defaultError.name = "ReferenceError";
+            defaultError.name = 'ReferenceError';
             defaultError.message = error.message;
             break;
 
           default:
-            defaultError.message = "";
+            defaultError.message = '';
             // defaultError.message = error.message;
 
             // Log Error only if unlisted
@@ -97,7 +97,7 @@ const preloader = (app: IApplication) => {
         ctx.body = { error: defaultError };
       } catch (catchError) {
         // Nested catch block of catch : Level 2
-        app.emit("error", catchError, ctx);
+        app.emit('error', catchError, ctx);
       }
     }
   });
@@ -108,32 +108,32 @@ const preloader = (app: IApplication) => {
     app.use(cors({}));
   }
 
-  //DONE: Enable bodyParser
+  // DONE: Enable bodyParser
   app.use(
     bodyParser({
-      jsonLimit: "50kb",
-      formLimit: "50kb",
-      enableTypes: ["json", "form"],
+      jsonLimit: '50kb',
+      formLimit: '50kb',
+      enableTypes: ['json', 'form'],
       onerror: (err, ctx) => {
         throw buildApiError({
           message: err.message,
           description:
-            "Fixes : 1) Max accepted data is 50kb. 2) Should be JSON / FORM data. 3) User TypeError.",
-          statusCode: 400
+            'Fixes : 1) Max accepted data is 50kb. 2) Should be JSON / FORM data. 3) User TypeError.',
+          statusCode: 400,
         });
-      }
-    })
+      },
+    }),
   );
 
   // Setting up views. EJS Templating engine.
-  const viewsPath = path.resolve(__dirname, "../views");
+  const viewsPath = path.resolve(__dirname, '../views');
 
   koaEJS(app, {
     root: viewsPath,
     layout: false, // Must provide layout.ejs in viewRoot. if enabled.
-    viewExt: "ejs",
+    viewExt: 'ejs',
     cache: config.CACHE_VIEWS === true,
-    debug: config.DEBUG === true
+    debug: config.DEBUG === true,
   });
 
   // Main Router
@@ -146,18 +146,18 @@ const preloader = (app: IApplication) => {
   // 404 Not Found Route => Moved to api/routes/index file
 
   // Centralized App Error handling. - START
-  app.on("error", (error, ctx: IRouterContext) => {
+  app.on('error', (error, ctx: IRouterContext) => {
     const defaultError: ICustomError = {
-      name: "CentralizedError",
-      message: "Something went wrong",
+      name: 'CentralizedError',
+      message: 'Something went wrong',
       statusCode: 500,
-      description: "Please retry later.",
-      code: "000",
-      isCustom: false
+      description: 'Please retry later.',
+      code: '000',
+      isCustom: false,
     };
 
     const errText = errorAsText(error);
-    logger.error("Centralized Error : \n" + errText);
+    logger.error(`Centralized Error : \n${errText}`);
 
     ctx.status = defaultError.statusCode;
     ctx.body = { error: defaultError };

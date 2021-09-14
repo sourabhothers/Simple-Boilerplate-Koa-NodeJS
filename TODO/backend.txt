@@ -1,1 +1,4 @@
 DONE : Validate config file
+
+TODO : Tests for API's, Databases, Server, Custom error throw & check.
+TODO : ESLint + Airbnb + Typescript proper configuration
